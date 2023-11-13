@@ -1,0 +1,45 @@
+{% set ndev = nvidia_num_devices | int %}
+version: '3.9'
+
+x-base_service: &base_service
+    ports:
+      - "${WEBUI_PORT:-7860}:7860"
+    volumes:
+      - &v1 ./data:/data
+      - &v2 ./output:/output
+    stop_signal: SIGKILL
+    tty: true
+
+x-auto-3-base: &base_auto
+    <<: *base_service
+    profiles: ["auto"]
+    build: ./services/AUTOMATIC1111
+    image: sd-auto:67
+    environment:
+      - CLI_ARGS=--allow-code --medvram --xformers --enable-insecure-extension-access --api
+    restart: always
+
+name: webui-docker
+
+services:
+  download:
+    build: ./services/download/
+    profiles: ["download"]
+    volumes:
+      - *v1
+
+{% for channel in range(ndev) %}
+  auto_{{ channel }}:
+    <<: *base_auto
+    ports:
+      - "{{ 7870 + channel }}:7860"
+    deploy:
+      resources:
+        reservations:
+          devices:
+              - driver: nvidia
+                device_ids: ['{{ channel }}']
+                capabilities: [compute, utility]
+    environment:
+      - CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api --subpath /ch0
+
