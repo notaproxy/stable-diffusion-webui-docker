@@ -9,4 +9,4 @@ c209caecac2f97b4bb8f4d726b70ac2ac9b35904b7fc99801e1f5e61f9210c13  /data/models/L
 31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b  /data/models/Stable-diffusion/sd_xl_base_1.0.safetensors
 e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff  /data/models/Stable-diffusion/sd_xl_base_1.0_0.9vae.safetensors
 7440042bbdc8a24813002c09b6b69b64dc90fded4472613437b7f55f9b7d9c5f  /data/models/Stable-diffusion/sd_xl_refiner_1.0.safetensors
-63aeecb90ff7bc1c115395962d3e803571385b61938377bc7089b36e81e92e2e  /data/models/sdxl_vae.safetensors
+63aeecb90ff7bc1c115395962d3e803571385b61938377bc7089b36e81e92e2e  /data/models/VAE/sdxl_vae.safetensors
